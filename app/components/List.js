@@ -1,4 +1,5 @@
 var React = require('react');
+var classNames = require('classnames');
 
 var List = React.createClass({
   render: function(){
@@ -27,8 +28,14 @@ var List = React.createClass({
     };
     var listItems = this.props.items.map(function(item, index){
       var complete = item.complete ? 'Completed' : 'Complete';
+      var activeClass = classNames({
+        'table-item' : true,
+        'item-status' : true,
+        'is-complete' : item.complete,
+        'not-complete' : !item.complete
+      });
       return (
-        <tr key={index} className="table-item" >
+        <tr key={index} className={activeClass} >
           <td>
             <span
               className="glyphicon glyphicon-remove"
@@ -37,7 +44,7 @@ var List = React.createClass({
             </span>
           </td>
           <td>
-             <span> {item.task}</span>
+             <span>{this.props.complete}  | {item.task}</span>
           </td>
           <td>
             <span><em><b>{item.priority}</b></em></span>
