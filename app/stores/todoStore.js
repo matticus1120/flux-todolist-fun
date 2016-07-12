@@ -6,11 +6,20 @@ var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 
 var _store = {
-  list: []
+  list: [],
+  selectedTodoId : null
 };
 
+var convertRawTask = function(item) {
+  var d = new Date();
+  item.time = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ', ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+  item.author = 'Matty Mick-C';
+  return item;
+}
+
 var addItem = function(item){
-  _store.list.push(item);
+  _store.list.push(convertRawTask(item));
+  console.log(_store.list);
 };
 
 var removeItem = function(index){

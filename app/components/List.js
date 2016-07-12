@@ -30,7 +30,6 @@ var List = React.createClass({
       var complete = item.complete ? 'Completed' : 'Complete';
       var activeClass = classNames({
         'table-item' : true,
-        'item-status' : true,
         'is-complete' : item.complete,
         'not-complete' : !item.complete
       });
@@ -44,7 +43,7 @@ var List = React.createClass({
             </span>
           </td>
           <td>
-             <span>{this.props.complete}  | {item.task}</span>
+             <span>{item.task}</span>
           </td>
           <td>
             <span><em><b>{item.priority}</b></em></span>
