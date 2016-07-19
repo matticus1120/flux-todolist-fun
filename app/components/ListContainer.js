@@ -1,9 +1,16 @@
 var React = require('react');
+
+/*components*/
 var AddItem = require('./AddItem');
 var List = require('./List');
 var TodoDetails = require('./TodoDetails');
+
+/*stores*/
 var todoStore = require('../stores/todoStore');
+
+/*actions*/
 var todoActions = require('../actions/todoActions');
+
 
 var ListContainer = React.createClass({
   getInitialState: function(){
@@ -24,9 +31,9 @@ var ListContainer = React.createClass({
     todoActions.removeItem(index);
   },
   handleCompleteItem: function(index, complete, e){
-    console.log(index);
-    console.log(complete);
-    console.log(e);
+    if (!e) var e = window.event;
+      e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
     todoActions.completeItem(index, complete);
   },
   handleSelectItem : function(index) {

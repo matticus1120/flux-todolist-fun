@@ -19,7 +19,6 @@ var convertRawTask = function(item) {
 
 var addItem = function(item){
   _store.list.push(convertRawTask(item));
-  console.log(_store.list);
 };
 
 var removeItem = function(index){
@@ -31,7 +30,6 @@ var completeItem = function(data){
 }
 
 var selectItem = function(index) {
-  console.log(_store);
   _store.selectedItemId = index;
 }
 
