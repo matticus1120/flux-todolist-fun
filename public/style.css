@@ -17,8 +17,12 @@
 
 .table-item {
     position: relative;
+    cursor: pointer;
 }
 .table-item.is-complete,
 .table-item.is-complete .complete-button {
     color: #ABABAB;
+}
+.todo-details-outer {
+    padding-top: 130px;
 }

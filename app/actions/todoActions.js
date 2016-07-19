@@ -20,6 +20,12 @@ var todoActions = {
       actionType: appConstants.COMPLETE_ITEM,
       data: data
     });
+  },
+  selectItem: function(index) {
+    AppDispatcher.handleAction({
+      actionType: appConstants.SELECT_ITEM,
+      data: index
+    });
   }
 };
 

@@ -34,7 +34,7 @@ var List = React.createClass({
         'not-complete' : !item.complete
       });
       return (
-        <tr key={index} className={activeClass} >
+        <tr key={index} className={activeClass} onClick={this.props.select.bind(null, index)}>
           <td>
             <span
               className="glyphicon glyphicon-remove"

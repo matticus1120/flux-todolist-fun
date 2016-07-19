@@ -23,12 +23,19 @@ var ListContainer = React.createClass({
   handleRemoveItem: function(index){
     todoActions.removeItem(index);
   },
-  handleCompleteItem: function(index, complete){
+  handleCompleteItem: function(index, complete, e){
+    console.log(index);
+    console.log(complete);
+    console.log(e);
     todoActions.completeItem(index, complete);
+  },
+  handleSelectItem : function(index) {
+    todoActions.selectItem(index);
   },
   _onChange: function(){
     this.setState({
-      list: todoStore.getList()
+      list: todoStore.getList(),
+      selectedItemId : todoStore.getSlectedItemId()
     })
   },
   render: function(){
@@ -38,11 +45,11 @@ var ListContainer = React.createClass({
           <div className="col-sm-12">
             <h3 className="text-center"> Todo List </h3>
             <AddItem add={this.handleAddItem}/>
-            <List items={this.state.list} remove={this.handleRemoveItem} complete={this.handleCompleteItem} />
+            <List items={this.state.list} remove={this.handleRemoveItem} complete={this.handleCompleteItem} select={this.handleSelectItem}/>
           </div>
         </div>
         <div className="col-sm-4">
-          <TodoDetails />
+          <TodoDetails item={this.state.list[this.state.selectedItemId]}/>
         </div>
       </div>
     )

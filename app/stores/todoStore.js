@@ -7,7 +7,7 @@ var CHANGE_EVENT = 'change';
 
 var _store = {
   list: [],
-  selectedTodoId : null
+  selectedItemId : null
 };
 
 var convertRawTask = function(item) {
@@ -30,6 +30,11 @@ var completeItem = function(data){
   _store.list[data.index].complete = !data.complete;
 }
 
+var selectItem = function(index) {
+  console.log(_store);
+  _store.selectedItemId = index;
+}
+
 var todoStore = objectAssign({}, EventEmitter.prototype, {
   addChangeListener: function(cb){
     this.on(CHANGE_EVENT, cb);
@@ -40,6 +45,9 @@ var todoStore = objectAssign({}, EventEmitter.prototype, {
   getList: function(){
     return _store.list;
   },
+  getSlectedItemId: function() {
+    return _store.selectedItemId;
+  }
 });
 
 AppDispatcher.register(function(payload){
@@ -56,6 +64,10 @@ AppDispatcher.register(function(payload){
       break;
     case appConstants.COMPLETE_ITEM:
       completeItem(action.data);
+      todoStore.emit(CHANGE_EVENT);
+      break;
+    case appConstants.SELECT_ITEM:
+      selectItem(action.data);
       todoStore.emit(CHANGE_EVENT);
       break;
     default:
