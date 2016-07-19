@@ -7,7 +7,7 @@ var TodoAddComment = React.createClass({
 
 			<div className="todo-add-comment">
 				<h5>Hello this is a comment add section</h5>
-				<button className="btn-todo-add-comment btn btn-primary" onClick={this.addTodoComment}>Add Comment</button>
+				<button className="btn-todo-add-comment btn btn-primary" onClick={this.props.add}>Add Comment</button>
 			</div>
 			
 		);

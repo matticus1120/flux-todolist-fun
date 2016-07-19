@@ -56,7 +56,7 @@ var ListContainer = React.createClass({
           </div>
         </div>
         <div className="col-sm-4">
-          <TodoDetails item={this.state.list[this.state.selectedItemId]}/>
+          <TodoDetails item={this.state.list[this.state.selectedItemId]} itemIndex={this.state.selectedItemId}/>
         </div>
       </div>
     )

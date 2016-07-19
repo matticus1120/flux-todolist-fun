@@ -1,15 +1,12 @@
 var React = require('react');
 
-/*components*/
-var TodoAddComment = require('./TodoAddComment');
-
 /*actions*/
 var todoCommentActions = require('../actions/todoCommentActions');
 
+/*components*/
+var TodoComments = require('./TodoComments');
+
 var TodoDetails = React.createClass({
-	handleAddComment: function(comment) {
-		todoCommentActions.addTodoComment(comment);
-	},
 	render : function() {
 		var details = false;
 		if( this.props.item ) {
@@ -24,7 +21,7 @@ var TodoDetails = React.createClass({
 		return (
 			<div className="todo-details-outer">
 				{details}
-				<TodoAddComment add={this.handleAddComment} />
+				<TodoComments itemIndex={this.props.itemIndex}/>
 			</div>
 		)
 	}	
