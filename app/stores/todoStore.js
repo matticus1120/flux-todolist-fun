@@ -14,6 +14,7 @@ var convertRawTask = function(item) {
   var d = new Date();
   item.time = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ', ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
   item.author = 'Matty Mick-C';
+  item.itemIndex = _store.list.length;
   return item;
 }
 

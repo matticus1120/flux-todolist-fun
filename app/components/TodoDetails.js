@@ -9,19 +9,23 @@ var TodoComments = require('./TodoComments');
 var TodoDetails = React.createClass({
 	render : function() {
 		var details = false;
+		console.log(this.props.item);
 		if( this.props.item ) {
-			details = <div className="todo-details">
+			details = 
+			<div>
+				<div className="todo-details">
 						<h3>{this.props.item.task}</h3>
 						<p><small>{this.props.item.time}</small></p>
 						<p><small>By: <em>{this.props.item.author}</em></small></p>
 						<p>This is a bit of a description!</p>
-					</div>;
+					</div>
+					<TodoComments itemIndex={this.props.item.itemIndex}/>
+				</div>;
 		}
 
 		return (
 			<div className="todo-details-outer">
 				{details}
-				<TodoComments itemIndex={this.props.itemIndex}/>
 			</div>
 		)
 	}	

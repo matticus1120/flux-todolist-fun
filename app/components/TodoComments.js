@@ -15,7 +15,7 @@ var TodoComments = React.createClass({
 
 			<div className="todo-comments">
 				<h4>Hello this is a comment section, for all comments</h4>
-				<TodoAddComment add={this.handleAddTodoComment}/>
+				<TodoAddComment itemIndex={this.props.itemIndex}/>
 			</div>
 			
 		);
