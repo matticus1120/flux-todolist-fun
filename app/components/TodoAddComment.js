@@ -3,16 +3,22 @@ var React = require('react');
 var TodoAddComment = React.createClass({
 
 	getInitialState : function() {
-		return { itemIndex : false, comment : null };
+		return { itemIndex : false, comment : '' };
 	},
 	handleCommentChange : function(e) {
 		this.setState({comment : e.target.value});
-		console.log(this.state);
 	},
 	handleSubmit : function(e) {
 		e.preventDefault();
-		var itemIndex = this.props.itemIndex;
-		this.setState({comment : ''});
+		
+		var newItem = {};
+		
+		newItem.itemIndex = this.props.itemIndex;
+		newItem.comment = this.state.comment;
+		this.props.add(newItem);
+
+		this.setState({ itemIndex : false, comment : '' });
+		
 	},
 	render : function() {
 		return (
