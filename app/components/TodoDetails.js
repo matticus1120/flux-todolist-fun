@@ -9,7 +9,6 @@ var TodoComments = require('./TodoComments');
 var TodoDetails = React.createClass({
 	render : function() {
 		var details = false;
-		console.log(this.props.item);
 		if( this.props.item ) {
 			details = 
 			<div>

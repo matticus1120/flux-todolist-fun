@@ -21,10 +21,10 @@ var todoActions = {
       data: data
     });
   },
-  selectItem: function(index) {
+  selectItem: function(id) {
     AppDispatcher.handleAction({
       actionType: appConstants.SELECT_ITEM,
-      data: index
+      data: id
     });
   }
 };

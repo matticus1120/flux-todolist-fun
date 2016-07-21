@@ -9,7 +9,7 @@
     text-transform: uppercase;
 }
 .complete-button:hover {
-		background-color: #E7E7E7;
+  background-color: #E7E7E7;
 }
 .complete-button.complete {
 	color: #D1D1D1;
@@ -23,6 +23,10 @@
 .table-item.is-complete .complete-button {
     color: #ABABAB;
 }
+.table-item.active,
+.table-item.active > td {
+    background-color: #d2d5ff !important;
+}
 .todo-details-outer {
-    padding-top: 130px;
+    padding-top: 34px;
 }
