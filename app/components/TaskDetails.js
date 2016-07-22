@@ -18,7 +18,7 @@ var TaskDetails = React.createClass({
 						<p><small>By: <em>{this.props.item.author}</em></small></p>
 						<p>This is a bit of a description!</p>
 					</div>
-					<CommentsContainer itemIndex={this.props.item.itemIndex}/>
+					<CommentsContainer taskId={this.props.taskId}/>
 				</div>;
 		}
 

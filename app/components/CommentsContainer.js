@@ -9,26 +9,29 @@ var commentActions = require('../actions/commentActions');
 
 /*stores*/
 var taskStore = require('../stores/taskStore');
+var commentStore = require('../stores/commentStore');
 
 var CommentsContainer = React.createClass({
 	getInitialState: function(){
 		return {
-			comments: taskStore.getTodoCommentsForComment()
+			comments: commentStore.getCommenstForTask(this.props.taskId)
 		}
 	},
 	componentDidMount: function(){
-		taskStore.addChangeListener(this._onChange);
+		commentStore.addChangeListener(this._onChange);
 	},
 	componentWillUnmount: function(){
-		taskStore.removeChangeListener(this._onChange);
+		commentStore.removeChangeListener(this._onChange);
 	},
 	handleAddTodoComment : function(newComment) {
-		commentActions.addTodoComment(newComment);
+		var data = {comment : newComment, taskId : this.props.taskId};
+		commentActions.addTodoComment(data);
 	},
 	_onChange: function(){
+		comments = commentStore.getCommenstForTask(this.props.taskId);
 		this.setState({
-			comments: taskStore.getTodoCommentsForComment()
-		})
+			comments: comments
+		});
 	},
 	render : function() {
 		return (
@@ -36,7 +39,7 @@ var CommentsContainer = React.createClass({
 			<div className="todo-comments">
 				<hr />
 				<h4>Comments</h4>
-				<CommentAdd itemIndex={this.props.itemIndex} add={this.handleAddTodoComment} />
+				<CommentAdd taskId={this.props.taskId} add={this.handleAddTodoComment} />
 				<CommentList comments={this.state.comments}/>
 			</div>
 			

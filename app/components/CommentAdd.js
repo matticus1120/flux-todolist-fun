@@ -3,21 +3,19 @@ var React = require('react');
 var CommentAdd = React.createClass({
 
 	getInitialState : function() {
-		return { itemIndex : false, comment : '' };
+		return { comment : '' };
 	},
 	handleCommentChange : function(e) {
 		this.setState({comment : e.target.value});
 	},
 	handleSubmit : function(e) {
 		e.preventDefault();
-		
-		var newItem = {};
-		
-		newItem.itemIndex = this.props.itemIndex;
-		newItem.comment = this.state.comment;
-		this.props.add(newItem);
+		//	don't need this here, as the parent already has the taskID
+			// newItem.taskId = this.props.taskId;
+		var comment = this.state.comment;
+		this.props.add(comment);
 
-		this.setState({ itemIndex : false, comment : '' });
+		this.setState({ comment : '' });
 		
 	},
 	render : function() {
