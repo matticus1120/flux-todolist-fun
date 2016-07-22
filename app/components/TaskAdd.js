@@ -1,6 +1,6 @@
 var React = require('react');
 
-var AddItem = React.createClass({
+var TaskAdd = React.createClass({
 
 	getInitialState: function() {
 		return { task : null, priority : null };
@@ -45,4 +45,7 @@ var AddItem = React.createClass({
 	}
 });
 
-module.exports = AddItem;
+module.exports = TaskAdd;
+
+
+

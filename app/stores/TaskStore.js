@@ -7,7 +7,7 @@ var CHANGE_EVENT = 'change';
 
 var _task_store = {
 	list: [],
-	selectedItemId : null
+	selectedTaskId : null
 };
 
 var _comments = [];
@@ -17,7 +17,9 @@ var getCurrentTime = function() {
 	var theTime = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
 	return theTime;
 }
-
+/**
+ * Task Functions
+ */
 var convertRawTask = function(item) {
 	var timestamp = Date.now();
 	item.time = getCurrentTime();
@@ -28,65 +30,20 @@ var convertRawTask = function(item) {
 	return item;
 }
 
-var convertRawComment = function(comment) {
-	
-	var newComment = {};
-	var timestamp = Date.now();
-
-	newComment.time = getCurrentTime();
-	newComment.timestamp = timestamp;
-	newComment.comment = comment;
-	newComment.author = 'Matty Mick-C';
-	newComment.taskId = _task_store.selectedItemId;
-	newComment.id = 'comment_' + timestamp;
-
-	return newComment;
-
-}
-
-
-var addItem = function(item){
-	_task_store.list.push(convertRawTask(item));
+var addTask = function(task){
+	_task_store.list.push(convertRawTask(task));
 };
 
-var removeItem = function(_id){
+var removeTask = function(_id){
 	_task_store.list = _task_store.list.filter( function(task) { return task.id != _id } );
 }
 
-var completeItem = function(data){
+var completeTask = function(data){
 	_task_store.list[data.index].complete = !data.complete;
 }
 
-var selectItem = function( id ) {
-	_task_store.selectedItemId = id;
-}
-
-var addComment = function(commentObject) {
-	_comments.push(convertRawComment(commentObject));
-}
-
-var getTodoComments = function() {
-	
-	var todoComments = [];
-	if( _comments.length < 1 ) return todoComments;
-	for(var i in _comments) {
-		if( _comments[i].taskId == _task_store.selectedItemId ) {
-			todoComments.push(_comments[i]);
-		}
-	}
-
-	todoComments.sort(function(a, b) {
-		if (b.timestamp < a.timestamp) {
-			return -1;
-		} 
-		else if (b.timestamp > a.timestamp) {
-			return 1;
-		}
-		return 0;
-	});
-
-	return todoComments;
-
+var selectTask = function( id ) {
+	_task_store.selectedTaskId = id;
 }
 
 var getAllTasks = function() {
@@ -105,18 +62,66 @@ var getAllTasks = function() {
 
 }
 
-var todoStore = objectAssign({}, EventEmitter.prototype, {
+/**
+ * Comment Functions
+ */
+var addComment = function(commentObject) {
+	_comments.push(convertRawComment(commentObject));
+}
+
+var convertRawComment = function(comment) {
+	
+	var newComment = {};
+	var timestamp = Date.now();
+
+	newComment.time = getCurrentTime();
+	newComment.timestamp = timestamp;
+	newComment.comment = comment;
+	newComment.author = 'Matty Mick-C';
+	newComment.taskId = _task_store.selectedTaskId;
+	newComment.id = 'comment_' + timestamp;
+
+	return newComment;
+
+}
+
+var getTodoComments = function() {
+	
+	var todoComments = [];
+	if( _comments.length < 1 ) return todoComments;
+	for(var i in _comments) {
+		if( _comments[i].taskId == _task_store.selectedTaskId ) {
+			todoComments.push(_comments[i]);
+		}
+	}
+
+	todoComments.sort(function(a, b) {
+		if (b.timestamp < a.timestamp) {
+			return -1;
+		} 
+		else if (b.timestamp > a.timestamp) {
+			return 1;
+		}
+		return 0;
+	});
+
+	return todoComments;
+
+}
+
+
+var taskStore = objectAssign({}, EventEmitter.prototype, {
 	addChangeListener: function(cb){
 		this.on(CHANGE_EVENT, cb);
 	},
 	removeChangeListener: function(cb){
 		this.removeListener(CHANGE_EVENT, cb);
 	},
-	getList: function(){
+	getTaskList: function(){
 		return getAllTasks();
 	},
 	getSlectedItemId: function() {
-		return _task_store.selectedItemId;
+		return _task_store.selectedTaskId;
 	},
 	getTodoCommentsForComment: function() {
 		return getTodoComments();
@@ -128,28 +133,28 @@ AppDispatcher.register(function(payload){
 
 	switch(action.actionType){
 		case appConstants.ADD_ITEM:
-			addItem(action.data);
-			todoStore.emit(CHANGE_EVENT);
+			addTask(action.data);
+			taskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.REMOVE_ITEM:
-			removeItem(action.data);
-			todoStore.emit(CHANGE_EVENT);
+			removeTask(action.data);
+			taskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.COMPLETE_ITEM:
-			completeItem(action.data);
-			todoStore.emit(CHANGE_EVENT);
+			completeTask(action.data);
+			taskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.SELECT_ITEM:
-			selectItem(action.data);
-			todoStore.emit(CHANGE_EVENT);
+			selectTask(action.data);
+			taskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.ADD_COMMENT:
 			addComment(action.data.comment);
-			todoStore.emit(CHANGE_EVENT);
+			taskStore.emit(CHANGE_EVENT);
 			break;
 		default:
 		return true;
 	}
 });
 
-module.exports = todoStore;
+module.exports = taskStore;

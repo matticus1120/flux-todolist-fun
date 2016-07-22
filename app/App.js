@@ -1,12 +1,12 @@
 var React = require('react');
-var ListContainer = require('./components/ListContainer');
+var TasksContainer = require('./components/TasksContainer');
 
 var App = React.createClass({
   render: function(){
     return (
       <div className="container">
         <div className="row">
-          <ListContainer />
+          <TasksContainer />
         </div>
       </div>
     )

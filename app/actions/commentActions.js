@@ -1,7 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var appConstants = require('../constants/appConstants');
 
-var todoCommentActions = {
+var commentActions = {
   addTodoComment: function(comment){
     AppDispatcher.handleAction({
       actionType: appConstants.ADD_COMMENT,
@@ -10,4 +10,4 @@ var todoCommentActions = {
   },
 };
 
-module.exports = todoCommentActions;
+module.exports = commentActions;

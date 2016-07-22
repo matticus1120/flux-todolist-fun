@@ -1,7 +1,7 @@
 var React = require('react');
 var classNames = require('classnames');
 
-var List = React.createClass({
+var TaskList = React.createClass({
 	render: function(){
 		var styles = {
 			uList: {
@@ -26,35 +26,34 @@ var List = React.createClass({
 				fontSize: 17
 			}
 		};
-		// console.log(listItems);
-		var listItems = this.props.items.map(function(item, index){
-			var complete = item.complete ? 'Completed' : 'Complete';
+		var taskListItem = this.props.tasks.map(function(task, index){
+			var complete = task.complete ? 'Completed' : 'Complete';
 			var activeClass = classNames({
 				'table-item' : true,
-				'is-complete' : item.complete,
-				'not-complete' : !item.complete,
-				'active': item.id == this.props.activeTask
+				'is-complete' : task.complete,
+				'not-complete' : !task.complete,
+				'active': task.id == this.props.activeTask
 			});
 			return (
-				<tr key={index} className={activeClass} onClick={this.props.select.bind(null, item.id)}>
+				<tr key={index} className={activeClass} onClick={this.props.select.bind(null, task.id)}>
 					<td>
 						<span
 							className="glyphicon glyphicon-remove"
 							style={styles.removeItem}
-							onClick={this.props.remove.bind(null, item.id)} >
+							onClick={this.props.remove.bind(null, task.id)} >
 						</span>
 					</td>
 					<td>
-						<span>{item.task}</span>
+						<span>{task.task}</span>
 						</td>
 					<td>
-						<span><em><b>{item.priority}</b></em></span>
+						<span><em><b>{task.priority}</b></em></span>
 					</td>
 					<td>
-						{item.time}
+						{task.time}
 					</td>
 					<td>
-						<span className="complete-button" onClick={this.props.complete.bind(null, index, item.complete)}>{ complete }</span>
+						<span className="complete-button" onClick={this.props.complete.bind(null, index, task.complete)}>{ complete }</span>
 					</td>
 				</tr>
 				)
@@ -72,7 +71,7 @@ var List = React.createClass({
 				</tr>
 				</thead>
 				<tbody>
-					{listItems}
+					{taskListItem}
 				</tbody>
 			</table>
 
@@ -80,4 +79,10 @@ var List = React.createClass({
 	}
 });
 
-module.exports = List;
+module.exports = TaskList;
+
+
+
+
+
+

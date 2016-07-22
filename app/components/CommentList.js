@@ -1,6 +1,6 @@
 var React = require('react');
 
-var TodoCommentList = React.createClass({
+var CommentList = React.createClass({
 	render : function() {
 		var allComments = this.props.comments.map(function(comment, index){
 			return (
@@ -20,4 +20,4 @@ var TodoCommentList = React.createClass({
 	}
 });
 
-module.exports = TodoCommentList;
+module.exports = CommentList;

@@ -1,6 +1,6 @@
 var React = require('react');
 
-var TodoAddComment = React.createClass({
+var CommentAdd = React.createClass({
 
 	getInitialState : function() {
 		return { itemIndex : false, comment : '' };
@@ -36,4 +36,4 @@ var TodoAddComment = React.createClass({
 
 });
 
-module.exports = TodoAddComment;
+module.exports = CommentAdd;

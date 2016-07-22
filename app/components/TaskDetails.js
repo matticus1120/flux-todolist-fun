@@ -1,12 +1,12 @@
 var React = require('react');
 
 /*actions*/
-var todoCommentActions = require('../actions/todoCommentActions');
+var commentActions = require('../actions/commentActions');
 
 /*components*/
-var TodoComments = require('./TodoComments');
+var CommentsContainer = require('./CommentsContainer');
 
-var TodoDetails = React.createClass({
+var TaskDetails = React.createClass({
 	render : function() {
 		var details = false;
 		if( this.props.item ) {
@@ -18,7 +18,7 @@ var TodoDetails = React.createClass({
 						<p><small>By: <em>{this.props.item.author}</em></small></p>
 						<p>This is a bit of a description!</p>
 					</div>
-					<TodoComments itemIndex={this.props.item.itemIndex}/>
+					<CommentsContainer itemIndex={this.props.item.itemIndex}/>
 				</div>;
 		}
 
@@ -30,4 +30,12 @@ var TodoDetails = React.createClass({
 	}	
 });
 
-module.exports = TodoDetails;
+module.exports = TaskDetails;
+
+
+
+
+
+
+
+
