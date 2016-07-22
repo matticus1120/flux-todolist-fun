@@ -23,6 +23,7 @@ var convertRawTask = function(item) {
 	item.time = getCurrentTime();
 	item.author = 'Matty Mick-C';
 	item.itemIndex = _task_store.list.length;
+	item.timestamp = timestamp;
 	item.id = 'task_' + timestamp;
 	return item;
 }
@@ -49,8 +50,6 @@ var addItem = function(item){
 };
 
 var removeItem = function(_id){
-	// _task_store.list.splice(index, 1);
-	console.log(_id);
 	_task_store.list = _task_store.list.filter( function(task) { return task.id != _id } );
 }
 
@@ -90,6 +89,22 @@ var getTodoComments = function() {
 
 }
 
+var getAllTasks = function() {
+	
+	_task_store.list.sort(function(a, b) {
+		if (b.timestamp < a.timestamp) {
+			return -1;
+		} 
+		else if (b.timestamp > a.timestamp) {
+			return 1;
+		}
+		return 0;
+	});
+
+	return _task_store.list;
+
+}
+
 var todoStore = objectAssign({}, EventEmitter.prototype, {
 	addChangeListener: function(cb){
 		this.on(CHANGE_EVENT, cb);
@@ -98,7 +113,7 @@ var todoStore = objectAssign({}, EventEmitter.prototype, {
 		this.removeListener(CHANGE_EVENT, cb);
 	},
 	getList: function(){
-		return _task_store.list;
+		return getAllTasks();
 	},
 	getSlectedItemId: function() {
 		return _task_store.selectedItemId;
