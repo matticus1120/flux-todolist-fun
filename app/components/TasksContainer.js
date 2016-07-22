@@ -54,12 +54,12 @@ var TasksContainer = React.createClass({
 	render: function(){
 		return (
 			<div className="row">
-				<div className="col-sm-7">
+				<div className="col-sm-6">
 						<h3 className="text-center"> Todo List </h3>
 						<TaskAdd add={this.handleAddTask}/>
 						<TaskList tasks={this.state.list} remove={this.handleRemoveTask} complete={this.handleCompleteTask} select={this.handleSelectTask} activeTask={this.state.selectedTaskId}/>
 				</div>
-				<div className="col-sm-5">
+				<div className="col-sm-6">
 					<TaskDetails item={this.getItemObject()} itemIndex={this.state.selectedTaskId}/>
 				</div>
 			</div>
