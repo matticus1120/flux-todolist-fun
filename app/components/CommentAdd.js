@@ -25,9 +25,14 @@ var CommentAdd = React.createClass({
 
 			<div className="todo-add-comment">
 				<form onSubmit={this.handleSubmit}>
-					<h5>Hello this is a comment add section</h5>
-					<input type="text" name="item-comment" className="item-comment" onChange={this.handleCommentChange} value={this.state.comment}/>
-					<button className="btn-todo-add-comment btn btn-primary">Add Comment</button>
+					<input 
+						type="text" 
+						name="item-comment" 
+						className="item-comment form-control" 
+						onChange={this.handleCommentChange} 
+						value={this.state.comment}
+						placeholder="Add Comment"
+					/>
 				</form>
 			</div>
 			

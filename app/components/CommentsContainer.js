@@ -36,7 +36,6 @@ var CommentsContainer = React.createClass({
 			<div className="todo-comments">
 				<hr />
 				<h4>Comments</h4>
-				<hr />
 				<CommentAdd itemIndex={this.props.itemIndex} add={this.handleAddTodoComment} />
 				<CommentList comments={this.state.comments}/>
 			</div>
