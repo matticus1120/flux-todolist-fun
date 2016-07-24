@@ -40,7 +40,6 @@ var TasksContainer = React.createClass({
 		taskActions.selectTask( id );
 	},
 	_onChange: function(){
-		var thing = taskStore.getSlectedItemId();
 		this.setState({
 			list: taskStore.getTaskList(),
 			selectedTaskId : taskStore.getSlectedItemId()
@@ -60,7 +59,7 @@ var TasksContainer = React.createClass({
 						<TaskList tasks={this.state.list} remove={this.handleRemoveTask} complete={this.handleCompleteTask} select={this.handleSelectTask} activeTask={this.state.selectedTaskId}/>
 				</div>
 				<div className="col-sm-6">
-					<TaskDetails item={this.getItemObject()} itemIndex={this.state.selectedTaskId}/>
+					<TaskDetails item={this.getItemObject()} taskId={this.state.selectedTaskId}/>
 				</div>
 			</div>
 			)
