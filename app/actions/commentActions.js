@@ -2,8 +2,8 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var appConstants = require('../constants/appConstants');
 
 var commentActions = {
-  addTodoComment: function(comment){
-    AppDispatcher.handleAction({
+  addTaskComment: function(comment){
+    AppDispatcher.addTaskComment({
       actionType: appConstants.ADD_COMMENT,
       data: comment
     });

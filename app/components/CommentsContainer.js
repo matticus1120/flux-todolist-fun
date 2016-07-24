@@ -23,9 +23,9 @@ var CommentsContainer = React.createClass({
 	componentWillUnmount: function(){
 		commentStore.removeChangeListener(this._onChange);
 	},
-	handleAddTodoComment : function(newComment) {
+	handleAddTaskComment : function(newComment) {
 		var data = {comment : newComment, taskId : this.props.taskId};
-		commentActions.addTodoComment(data);
+		commentActions.addTaskComment(data);
 	},
 	_onChange: function(){
 		comments = commentStore.getCommenstForTask(this.props.taskId);
@@ -39,7 +39,7 @@ var CommentsContainer = React.createClass({
 			<div className="todo-comments">
 				<hr />
 				<h4>Comments</h4>
-				<CommentAdd taskId={this.props.taskId} add={this.handleAddTodoComment} />
+				<CommentAdd taskId={this.props.taskId} add={this.handleAddTaskComment} />
 				<CommentList comments={this.state.comments}/>
 			</div>
 			
