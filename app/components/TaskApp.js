@@ -11,7 +11,7 @@ var taskStore = require('../stores/taskStore');
 /*actions*/
 var taskActions = require('../actions/taskActions');
 
-var TasksContainer = React.createClass({
+var TaskApp = React.createClass({
 	getInitialState: function(){
 		return {
 			list: taskStore.getTaskList(),
@@ -66,4 +66,4 @@ var TasksContainer = React.createClass({
 	}
 });
 
-module.exports = TasksContainer;
+module.exports = TaskApp;

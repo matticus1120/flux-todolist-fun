@@ -1,5 +1,5 @@
 var React = require('react');
-var TasksContainer = require('./components/TasksContainer');
+var TaskApp = require('./components/TaskApp');
 
 
 var App = React.createClass({
@@ -7,7 +7,7 @@ var App = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <TasksContainer />
+          <TaskApp />
         </div>
       </div>
     )
