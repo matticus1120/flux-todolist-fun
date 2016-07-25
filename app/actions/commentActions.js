@@ -3,7 +3,7 @@ var appConstants = require('../constants/appConstants');
 
 var commentActions = {
   addTaskComment: function(comment){
-    AppDispatcher.addTaskComment({
+    AppDispatcher.handleAction({
       actionType: appConstants.ADD_COMMENT,
       data: comment
     });

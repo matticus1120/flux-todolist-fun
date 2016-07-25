@@ -21,8 +21,13 @@
     "react": "^0.12.1"
   },
   "devDependencies": {
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "http-server": "^0.8.0",
     "jsx-loader": "^0.12.2",
-    "webpack": "^1.5.3",
-    "http-server": "^0.8.0"
+    "node-sass": "^3.8.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
   }
 }
