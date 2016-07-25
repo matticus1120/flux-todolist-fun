@@ -47,7 +47,7 @@ var TaskList = React.createClass({
 						<span>{task.task}</span>
 						</td>
 					<td>
-						<span><em><b>{task.priority}</b></em></span>
+						<span><em>{task.priority}</em></span>
 					</td>
 					<td>
 						{task.time}
@@ -60,20 +60,26 @@ var TaskList = React.createClass({
 		}.bind(this));
 		return (
 
-			<table style={styles.uList} className="table table-striped">
-				<thead>
-				<tr>
-					<th></th>
-					<th>Task</th>
-					<th>Priority</th>
-					<th>Time</th>
-					<th>Complete</th>
-				</tr>
-				</thead>
-				<tbody>
-					{taskListItem}
-				</tbody>
-			</table>
+			<div className="task-list-outer">
+				<header className="task-list-header">
+					<p>{this.props.tasks.length} tasks total</p>
+				</header>
+				<table style={styles.uList} className="table table-striped">
+					<thead>
+					<tr>
+						<th></th>
+						<th>Task</th>
+						<th>Priority</th>
+						<th>Time</th>
+						<th>Complete</th>
+					</tr>
+					</thead>
+					<tbody>
+						{taskListItem}
+					</tbody>
+				</table>
+
+			</div>
 
 			)
 	}

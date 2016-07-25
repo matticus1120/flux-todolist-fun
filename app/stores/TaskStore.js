@@ -5,18 +5,20 @@ var appUtilities = require('../utils/appUtilities');
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 
+
 var CHANGE_EVENT = 'change';
 
 var _task_store = {
 	list: [],
-	selectedTaskId : null
+	filteredList: [],
+	selectedTaskId : null,
+	priorities : [ 'Who cares?', 'Pretty Low', 'Medium-Low', 'Medium', 'High Priority Shit', 'Oh God!!' ],
+	selectedPriority : null
 };
-
-var _comments = [];
 
 var addTask = function(task){
 	_task_store.list.push(appUtilities.convertRawTask(task));
-};
+}
 
 var removeTask = function(_taskId){
 	var elementPos = _task_store.list.map(function(task) {return task.id; }).indexOf(_taskId);
@@ -27,8 +29,28 @@ var completeTask = function(data){
 	_task_store.list[data.index].complete = !data.complete;
 }
 
+var setTaskPriorityFilter = function(_priority) {
+
+	var filteredList = [];
+	
+	_task_store.selectedPriority = _priority;
+
+	for( var i in _task_store.list ) {
+		if( _priority ==  _task_store.list[i].priority ) {
+			filteredList.push( _task_store.list[i] );
+		}
+	}
+	
+	_task_store.filteredList = filteredList;
+
+}
+
 var selectTask = function( id ) {
 	_task_store.selectedTaskId = id;
+}
+
+var getPriorities = function() {
+	return _task_store.priorities;
 }
 
 var getAllTasks = function() {
@@ -47,7 +69,14 @@ var getAllTasks = function() {
 
 }
 
-
+var getAllFilteredTasks = function() {
+	if( !_task_store.selectedPriority ) {
+		return getAllTasks();
+	}
+	else {
+		return _task_store.filteredList;
+	}
+}
 
 var taskStore = objectAssign({}, EventEmitter.prototype, {
 	addChangeListener: function(cb){
@@ -56,12 +85,18 @@ var taskStore = objectAssign({}, EventEmitter.prototype, {
 	removeChangeListener: function(cb){
 		this.removeListener(CHANGE_EVENT, cb);
 	},
-	getTaskList: function(){
-		return getAllTasks();
+	getFilteredTaskList: function(){
+		return getAllFilteredTasks();
 	},
 	getSlectedItemId: function() {
 		return _task_store.selectedTaskId;
 	},
+	getAllPriorities: function() {
+		return _task_store.priorities;
+	},
+	getSelectedPriority: function() {
+		return _task_store.selectedPriority;
+	}
 });
 
 AppDispatcher.register(function(payload){
@@ -82,6 +117,10 @@ AppDispatcher.register(function(payload){
 			break;
 		case appConstants.SELECT_ITEM:
 			selectTask(action.data);
+			taskStore.emit(CHANGE_EVENT);
+			break;
+		case appConstants.SELECT_PRIORITY:
+			setTaskPriorityFilter(action.data);
 			taskStore.emit(CHANGE_EVENT);
 			break;
 		default:

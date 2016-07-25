@@ -38,7 +38,6 @@ var CommentsContainer = React.createClass({
 
 			<div className="todo-comments">
 				<hr />
-				<h4>Comments</h4>
 				<CommentAdd taskId={this.props.taskId} add={this.handleAddTaskComment} />
 				<CommentList comments={this.state.comments}/>
 			</div>
