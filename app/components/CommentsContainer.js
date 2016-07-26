@@ -9,12 +9,12 @@ var commentActions = require('../actions/commentActions');
 
 /*stores*/
 var taskStore = require('../stores/taskStore');
-var commentStore = require('../stores/commentStore');
+var CommentStore = require('../stores/commentStore');
 
 var CommentsContainer = React.createClass({
 	getInitialState: function(){
 		return {
-			comments: commentStore.getCommenstForTask(this.props.taskId)
+			comments: CommentStore.getCommenstForTask(this.props.taskId)
 		}
 	},
 	componentDidMount: function(){

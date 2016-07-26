@@ -5,6 +5,8 @@ var appUtilities = require('../utils/appUtilities');
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 
+/*stores*/
+var PriorityStore = require('../stores/PriorityStore');
 
 var CHANGE_EVENT = 'change';
 
@@ -12,8 +14,6 @@ var _task_store = {
 	list: [],
 	filteredList: [],
 	selectedTaskId : null,
-	priorities : [ 'Who cares?', 'Pretty Low', 'Medium-Low', 'Medium', 'High Priority Shit', 'Oh God!!' ],
-	selectedPriority : null
 };
 
 var addTask = function(task){
@@ -29,11 +29,11 @@ var completeTask = function(data){
 	_task_store.list[data.index].complete = !data.complete;
 }
 
-var setTaskPriorityFilter = function(_priority) {
+var setTaskPriorityFilter = function() {
 
 	var filteredList = [];
 	
-	_task_store.selectedPriority = _priority;
+	_priority = PriorityStore.getSelectedPriority();
 
 	for( var i in _task_store.list ) {
 		if( _priority ==  _task_store.list[i].priority ) {
@@ -49,10 +49,10 @@ var selectTask = function( id ) {
 	_task_store.selectedTaskId = id;
 }
 
-var getPriorities = function() {
+/*var getPriorities = function() {
 	return _task_store.priorities;
 }
-
+*/
 var getAllTasks = function() {
 	
 	_task_store.list.sort(function(a, b) {
@@ -91,12 +91,6 @@ var taskStore = objectAssign({}, EventEmitter.prototype, {
 	getSlectedItemId: function() {
 		return _task_store.selectedTaskId;
 	},
-	getAllPriorities: function() {
-		return _task_store.priorities;
-	},
-	getSelectedPriority: function() {
-		return _task_store.selectedPriority;
-	}
 });
 
 AppDispatcher.register(function(payload){
@@ -120,7 +114,7 @@ AppDispatcher.register(function(payload){
 			taskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.SELECT_PRIORITY:
-			setTaskPriorityFilter(action.data);
+			setTaskPriorityFilter();
 			taskStore.emit(CHANGE_EVENT);
 			break;
 		default:

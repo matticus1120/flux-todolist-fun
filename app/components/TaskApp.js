@@ -1,13 +1,14 @@
 var React = require('react');
 
 /*components*/
-var TaskPriorityList = require('./TaskPriorityList');
+var PriorityList = require('./PriorityList');
 var TaskAdd = require('./TaskAdd');
 var TaskList = require('./TaskList');
 var TaskDetails = require('./TaskDetails');
 
 /*stores*/
 var taskStore = require('../stores/taskStore');
+var PriorityStore = require('../stores/PriorityStore');
 
 /*actions*/
 var taskActions = require('../actions/taskActions');
@@ -17,7 +18,7 @@ var TaskApp = React.createClass({
 		return {
 			list: taskStore.getFilteredTaskList(),
 			selectedTaskId: null,
-			priorities: taskStore.getAllPriorities()
+			priorities: PriorityStore.getAllPriorities()
 		}
 	},
 	componentDidMount: function(){
@@ -61,7 +62,7 @@ var TaskApp = React.createClass({
 		return (
 			<div className="row">
 				<div className="col-sm-2">
-					<TaskPriorityList priorities={this.state.priorities} selectPriority={this.handleSelectPriority} />
+					<PriorityList  />
 				</div>
 				<div className="col-sm-6 task-app-outer">
 					<h3>Task List</h3>
