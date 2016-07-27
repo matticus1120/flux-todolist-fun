@@ -12,7 +12,7 @@ var TaskPriorityList = React.createClass({
 		}
 	},
 	selectPriority: function( index ) {
-		setState({ selectedPriorityIndex : index  });
+		this.setState({ selectedPriorityIndex : index });
 	},
 	render : function() {
 		var allPriorities = this.state.priorities.map(function(priority, index){
