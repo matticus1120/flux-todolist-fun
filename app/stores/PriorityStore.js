@@ -34,6 +34,9 @@ var PriorityStore = objectAssign({}, EventEmitter.prototype, {
 	},
 	getSelectedPriority: function() {
 		return _priority_store.selectedPriority;
+	},
+	getPriorityObject: function(index) {
+		return _priority_store.priorities[index];
 	}
 });
 

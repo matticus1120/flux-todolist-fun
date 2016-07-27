@@ -49,10 +49,6 @@ var selectTask = function( id ) {
 	_task_store.selectedTaskId = id;
 }
 
-/*var getPriorities = function() {
-	return _task_store.priorities;
-}
-*/
 var getAllTasks = function() {
 	
 	_task_store.list.sort(function(a, b) {

@@ -1,6 +1,8 @@
 var React = require('react');
 var classNames = require('classnames');
 
+var PriorityStore = require('../stores/PriorityStore');
+
 var TaskList = React.createClass({
 	render: function(){
 		
@@ -12,6 +14,7 @@ var TaskList = React.createClass({
 				'not-complete' : !task.complete,
 				'active': task.id == this.props.activeTask
 			});
+			var priorityObj = PriorityStore.getPriorityObject(task.priority);
 			return (
 				<tr key={index} className={activeClass} onClick={this.props.select.bind(null, task.id)}>
 					<td>
@@ -23,7 +26,7 @@ var TaskList = React.createClass({
 						<span>{task.task}</span>
 						</td>
 					<td>
-						<span><em>{task.priority}</em></span>
+						<span><em>{priorityObj.priority}</em></span>
 					</td>
 					<td>
 						{task.time}
