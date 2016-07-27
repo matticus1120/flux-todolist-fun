@@ -3,29 +3,7 @@ var classNames = require('classnames');
 
 var TaskList = React.createClass({
 	render: function(){
-		var styles = {
-			uList: {
-				paddingLeft: 0,
-				listStyleType: "none"
-			},
-			listGroup: {
-				margin: '5px 0',
-				borderRadius: 5
-			},
-			removeItem: {
-				fontSize: 20,
-				float: "left",
-				position: "relative",
-				top: 0,
-				left: 6,
-				cursor: "pointer",
-				color: "rgb(222, 79, 79)"
-			},
-			todoItem: {
-				paddingLeft: 20,
-				fontSize: 17
-			}
-		};
+		
 		var taskListItem = this.props.tasks.map(function(task, index){
 			var complete = task.complete ? 'Completed' : 'Complete';
 			var activeClass = classNames({
@@ -37,10 +15,8 @@ var TaskList = React.createClass({
 			return (
 				<tr key={index} className={activeClass} onClick={this.props.select.bind(null, task.id)}>
 					<td>
-						<span
-							className="glyphicon glyphicon-remove"
-							style={styles.removeItem}
-							onClick={this.props.remove.bind(null, task.id)} >
+						<span onClick={this.props.remove.bind(null, task.id)} >
+							<i className="glyphicon glyphicon-remove"></i>
 						</span>
 					</td>
 					<td>
@@ -64,7 +40,7 @@ var TaskList = React.createClass({
 				<header className="task-list-header">
 					<p>{this.props.tasks.length} tasks total</p>
 				</header>
-				<table style={styles.uList} className="table table-striped">
+				<table  className="table table-striped">
 					<thead>
 					<tr>
 						<th></th>

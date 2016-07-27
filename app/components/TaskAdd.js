@@ -27,7 +27,7 @@ var TaskAdd = React.createClass({
 	render: function(){
 		var allPriorities = this.props.priorities.map(function(priority, index){
 			return (
-				<option value={priority} key={index + 1}>{priority}</option>
+				<option value={priority} key={index}>{priority.priority}</option>
 			);
 		});
 		return (
