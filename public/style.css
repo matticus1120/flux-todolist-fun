@@ -1,23 +1,23 @@
-.task-app-outer .complete-button {
-  float: right;
-  color: #515151;
-  font-style: italic;
-  cursor: pointer;
-  border: solid thin;
-  border-radius: 3px;
-  padding: 0px 4px 1px 4px;
-  text-transform: uppercase;
-  font-size: 11px; }
-
-.task-app-outer .table-item {
-  position: relative;
-  cursor: pointer; }
-
-.task-app-outer .table-item.is-complete .complete-button {
-  color: #ABABAB; }
-
-.task-app-outer .table-item.active > td {
-  background-color: #d2d5ff !important; }
+.task-app-outer {
+  position: relative; }
+  .task-app-outer .complete-button {
+    float: right;
+    color: #515151;
+    font-style: italic;
+    cursor: pointer;
+    border: solid thin;
+    border-radius: 3px;
+    padding: 2px 4px 0px 4px;
+    text-transform: uppercase;
+    color: inherit; }
+  .task-app-outer .table-item {
+    position: relative;
+    cursor: pointer;
+    font-size: 12px; }
+  .task-app-outer .table-item.is-complete .complete-button {
+    color: #ABABAB; }
+  .task-app-outer .table-item.active > td {
+    background-color: #d2d5ff !important; }
 
 .blue {
   font-size: 15px; }

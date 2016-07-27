@@ -25,18 +25,17 @@ var TaskAdd = React.createClass({
 		this.setState({ priority : e.target.value });
 	},
 	render: function(){
+		var allPriorities = this.props.priorities.map(function(priority, index){
+			return (
+				<option value={priority} key={index + 1}>{priority}</option>
+			);
+		});
 		return (
 			<div>
 				<form className="new-task-form" onSubmit={this.handleSubmit}>
 					<input type="text" ref="newItem" className="form-control" placeholder="New Item"   onChange={this.handleItemChange} value={this.state.task}/>
 					<select ref="itemPriority" name="priority" className="form-control" onChange={this.handlePriorityChange}>
-						<option value="">Select Priority</option>
-						<option value="Who cares?">Who cares?</option>
-						<option value="Pretty Low">Pretty Low</option>
-						<option value="Med. - Low">Med. - Low</option>
-						<option value="Medes">Medes</option>
-						<option value="High shit">High Shit</option>
-						<option value="Oh god!!">Oh God!!</option>
+						{allPriorities}
 					</select> 
 					<input type="submit" name="submit" value="Enter New Task" className="btn btn-block btn-success" />
 				</form>
