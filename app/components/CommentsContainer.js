@@ -18,17 +18,18 @@ var CommentsContainer = React.createClass({
 		}
 	},
 	componentDidMount: function(){
-		commentStore.addChangeListener(this._onChange);
+		CommentStore.addChangeListener(this._onChange);
 	},
 	componentWillUnmount: function(){
-		commentStore.removeChangeListener(this._onChange);
+		CommentStore.removeChangeListener(this._onChange);
 	},
 	handleAddTaskComment : function(newComment) {
 		var data = {comment : newComment, taskId : this.props.taskId};
 		commentActions.addTaskComment(data);
 	},
 	_onChange: function(){
-		comments = commentStore.getCommenstForTask(this.props.taskId);
+		comments = CommentStore.getCommenstForTask(this.props.taskId);
+		console.log('yo yo yo');
 		this.setState({
 			comments: comments
 		});

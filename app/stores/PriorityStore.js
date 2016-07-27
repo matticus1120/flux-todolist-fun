@@ -5,6 +5,8 @@ var appUtilities = require('../utils/appUtilities');
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 
+var CHANGE_EVENT = 'change';
+
 var _priority_store = {
 	// priorities : [ 'Who cares?', 'Pretty Low', 'Medium-Low', 'Medium', 'High Priority Shit', 'Oh God!!' ],
 	priorities : [
@@ -15,11 +17,15 @@ var _priority_store = {
 		{ order : 4, priority : 'High Priority Shit' },
 		{ order : 5, priority : 'Oh God!!' }
 	],
-	selectedPriority : null
+	selectedPriority : -1
 };
 
 var getPriorities = function() {
 	return _priority_store.priorities;
+}
+
+var setSelectedPriorityIndex = function(index) {
+	_priority_store.selectedPriority = index;
 }
 
 var PriorityStore = objectAssign({}, EventEmitter.prototype, {
@@ -46,7 +52,7 @@ AppDispatcher.register(function(payload){
 
 	switch(action.actionType){
 		case appConstants.SELECT_PRIORITY:
-			setTaskPriorityFilter(action.data);
+			setSelectedPriorityIndex(action.data);
 			PriorityStore.emit(CHANGE_EVENT);
 			break;
 		default:

@@ -1,5 +1,8 @@
 var React = require('react');
 
+/*actions*/
+var taskActions = require('../actions/taskActions');
+
 /*stores*/
 var PriorityStore = require('../stores/PriorityStore');
 
@@ -8,11 +11,11 @@ var TaskPriorityList = React.createClass({
 	getInitialState: function() {
 		return {
 			priorities : PriorityStore.getAllPriorities(),
-			selectedPriorityIndex : null
+			selectedPriorityIndex : -1
 		}
 	},
 	selectPriority: function( index ) {
-		this.setState({ selectedPriorityIndex : index });
+		taskActions.selectPriority(index);
 	},
 	render : function() {
 		var allPriorities = this.state.priorities.map(function(priority, index){
@@ -26,7 +29,7 @@ var TaskPriorityList = React.createClass({
 			<div clasName="priority-list-outer">
 				<h4>Select Priority</h4>
 				<ul className="list-group priority-list">
-					<li className="list-group-item" key="0"><a href="#" onClick={this.selectPriority.bind(null, false)}>All</a></li>					
+					<li className="list-group-item" key="0"><a href="#" onClick={this.selectPriority.bind(null, -1)}>All</a></li>					
 					{allPriorities}
 				</ul>
 			</div>

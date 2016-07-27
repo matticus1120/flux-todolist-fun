@@ -66,7 +66,7 @@ var getAllTasks = function() {
 }
 
 var getAllFilteredTasks = function() {
-	if( !_task_store.selectedPriority ) {
+	if( PriorityStore.getSelectedPriority()  == -1 ) {
 		return getAllTasks();
 	}
 	else {

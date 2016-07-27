@@ -14,7 +14,7 @@ var TaskAdd = React.createClass({
 		newItemObj.complete = false;
 		var newItem = newItemObj;
 
-		this.setState({ task : null, priority : null });
+		this.setState({ task : null });
 		this.props.add(newItem);
 
 	},

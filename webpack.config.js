@@ -1,4 +1,5 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
 	entry: "./app/App.js",
@@ -26,8 +27,10 @@ module.exports = {
 	plugins: [
 		new ExtractTextPlugin('public/style.css', {
 			allChunks: true
-	})
-    ]
+		}),
+		new WebpackNotifierPlugin({alwaysNotify: true})
+
+	]
 
 
 };
