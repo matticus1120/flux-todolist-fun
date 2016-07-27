@@ -7,7 +7,7 @@ var TaskList = require('./TaskList');
 var TaskDetails = require('./TaskDetails');
 
 /*stores*/
-var taskStore = require('../stores/taskStore');
+var TaskStore = require('../stores/TaskStore');
 var PriorityStore = require('../stores/PriorityStore');
 
 /*actions*/
@@ -16,16 +16,18 @@ var taskActions = require('../actions/taskActions');
 var TaskApp = React.createClass({
 	getInitialState: function(){
 		return {
-			list: taskStore.getFilteredTaskList(),
+			list: TaskStore.getFilteredTaskList(),
 			selectedTaskId: null,
 			priorities: PriorityStore.getAllPriorities()
 		}
 	},
 	componentDidMount: function(){
-		taskStore.addChangeListener(this._onChange);
+		TaskStore.addChangeListener(this._onChange);
+		// PriorityStore.addChangeListener(this._onChange);
 	},
 	componentWillUnmount: function(){
-		taskStore.removeChangeListener(this._onChange);
+		TaskStore.removeChangeListener(this._onChange);
+		// PriorityStore.removeChangeListener(this._onChange);
 	},
 	handleAddTask: function(newItem){
 		taskActions.addTask(newItem);
@@ -33,19 +35,19 @@ var TaskApp = React.createClass({
 	handleRemoveTask: function(index){
 		taskActions.removeTask(index);
 	},
-	handleCompleteTask: function(index, complete, e){
+	handleCompleteTask: function(taskId, e){
 		if (!e) var e = window.event;
 			e.cancelBubble = true;
 		if (e.stopPropagation) e.stopPropagation();
-			taskActions.completeTask(index, complete);
+			taskActions.completeTask(taskId);
 	},
 	handleSelectTask : function( id ) {
 		taskActions.selectTask( id );
 	},
 	_onChange: function(){
 		this.setState({
-			list: taskStore.getFilteredTaskList(),
-			selectedTaskId : taskStore.getSlectedItemId()
+			list: TaskStore.getFilteredTaskList(),
+			selectedTaskId : TaskStore.getSlectedItemId()
 		});
 	},
 	getItemObject: function() {

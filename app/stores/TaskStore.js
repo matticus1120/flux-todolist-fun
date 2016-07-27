@@ -18,15 +18,19 @@ var _task_store = {
 
 var addTask = function(task){
 	_task_store.list.push(appUtilities.convertRawTask(task));
+	setTaskPriorityFilter();
 }
 
 var removeTask = function(_taskId){
 	var elementPos = _task_store.list.map(function(task) {return task.id; }).indexOf(_taskId);
 	_task_store.list.splice(elementPos, 1);
+	setTaskPriorityFilter();
 }
 
-var completeTask = function(data){
-	_task_store.list[data.index].complete = !data.complete;
+var completeTask = function(taskId){
+	var elementPos = _task_store.list.map(function(task) {return task.id; }).indexOf(taskId);
+	var complete = _task_store.list[elementPos].complete;
+	_task_store.list[elementPos].complete = !complete;
 }
 
 var setTaskPriorityFilter = function() {
@@ -43,6 +47,11 @@ var setTaskPriorityFilter = function() {
 	
 	_task_store.filteredList = filteredList;
 
+}
+
+var getPriorityTaskTotal= function(_priority_index) {
+	var arr = _task_store.list.filter( function(task) { return _priority_index == task.priority } );
+	return arr.length;
 }
 
 var selectTask = function( id ) {
@@ -74,7 +83,7 @@ var getAllFilteredTasks = function() {
 	}
 }
 
-var taskStore = objectAssign({}, EventEmitter.prototype, {
+var TaskStore = objectAssign({}, EventEmitter.prototype, {
 	addChangeListener: function(cb){
 		this.on(CHANGE_EVENT, cb);
 	},
@@ -87,35 +96,38 @@ var taskStore = objectAssign({}, EventEmitter.prototype, {
 	getSlectedItemId: function() {
 		return _task_store.selectedTaskId;
 	},
+	getPriorityTaskCount: function(index) {
+		return getPriorityTaskTotal(index);
+	}
 });
 
 AppDispatcher.register(function(payload){
 	var action = payload.action;
-
+	console.log(action.actionType);
 	switch(action.actionType){
 		case appConstants.ADD_ITEM:
 			addTask(action.data);
-			taskStore.emit(CHANGE_EVENT);
+			TaskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.REMOVE_ITEM:
 			removeTask(action.data);
-			taskStore.emit(CHANGE_EVENT);
+			TaskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.COMPLETE_ITEM:
 			completeTask(action.data);
-			taskStore.emit(CHANGE_EVENT);
+			TaskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.SELECT_ITEM:
 			selectTask(action.data);
-			taskStore.emit(CHANGE_EVENT);
+			TaskStore.emit(CHANGE_EVENT);
 			break;
 		case appConstants.SELECT_PRIORITY:
 			setTaskPriorityFilter();
-			taskStore.emit(CHANGE_EVENT);
+			TaskStore.emit(CHANGE_EVENT);
 			break;
 		default:
 		return true;
 	}
 });
 
-module.exports = taskStore;
+module.exports = TaskStore;

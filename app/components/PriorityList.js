@@ -5,6 +5,7 @@ var taskActions = require('../actions/taskActions');
 
 /*stores*/
 var PriorityStore = require('../stores/PriorityStore');
+var TaskStore = require('../stores/TaskStore');
 
 var TaskPriorityList = React.createClass({
 
@@ -22,6 +23,7 @@ var TaskPriorityList = React.createClass({
 			return (
 				<li className="list-group-item" key={index + 1} >
 					<a href="#" onClick={this.selectPriority.bind(null, index)}>{priority.priority}</a>
+					{ TaskStore.getPriorityTaskCount(index) ?  <em> ({ TaskStore.getPriorityTaskCount(index) })</em> : '' }
 				</li>
 			);
 		}.bind(this));

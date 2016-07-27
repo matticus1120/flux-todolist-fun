@@ -3,7 +3,7 @@ var appConstants = require('../constants/appConstants');
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 var appUtilities = require('../utils/appUtilities');
-var taskStore = require('./taskStore');
+var TaskStore = require('./TaskStore');
 
 var CHANGE_EVENT = 'change';
 
@@ -41,7 +41,7 @@ var getCommentsForTask = function(_taskId) {
 }
 
 var getCommentsForSelectedTask = function() {
-	return getCommentsForTask(taskStore.getSlectedItemId());
+	return getCommentsForTask(TaskStore.getSlectedItemId());
 }
 
 var commentStore = objectAssign({}, EventEmitter.prototype, {

@@ -8,7 +8,7 @@ var CommentList = require('./CommentList');
 var commentActions = require('../actions/commentActions');
 
 /*stores*/
-var taskStore = require('../stores/taskStore');
+var TaskStore = require('../stores/TaskStore');
 var CommentStore = require('../stores/commentStore');
 
 var CommentsContainer = React.createClass({

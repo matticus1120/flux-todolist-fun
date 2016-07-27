@@ -49,7 +49,6 @@ var PriorityStore = objectAssign({}, EventEmitter.prototype, {
 
 AppDispatcher.register(function(payload){
 	var action = payload.action;
-
 	switch(action.actionType){
 		case appConstants.SELECT_PRIORITY:
 			setSelectedPriorityIndex(action.data);

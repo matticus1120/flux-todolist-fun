@@ -32,7 +32,7 @@ var TaskList = React.createClass({
 						{task.time}
 					</td>
 					<td>
-						<span className="complete-button" onClick={this.props.complete.bind(null, index, task.complete)}>{ complete }</span>
+						<span className="complete-button" onClick={this.props.complete.bind(null, task.id)}>{ complete }</span>
 					</td>
 				</tr>
 				)

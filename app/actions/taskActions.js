@@ -14,11 +14,10 @@ var taskActions = {
 			data: index
 		})
 	},
-	completeTask: function(index, complete) {
-		data = {index : index, complete : complete};
+	completeTask: function(taskId) {
 		AppDispatcher.handleAction({
 			actionType: appConstants.COMPLETE_ITEM,
-			data: data
+			data: taskId
 		});
 	},
 	selectTask: function(id) {
