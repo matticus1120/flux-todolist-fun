@@ -23,11 +23,9 @@ var TaskApp = React.createClass({
 	},
 	componentDidMount: function(){
 		TaskStore.addChangeListener(this._onChange);
-		// PriorityStore.addChangeListener(this._onChange);
 	},
 	componentWillUnmount: function(){
 		TaskStore.removeChangeListener(this._onChange);
-		// PriorityStore.removeChangeListener(this._onChange);
 	},
 	handleAddTask: function(newItem){
 		taskActions.addTask(newItem);

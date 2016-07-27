@@ -6,7 +6,9 @@ var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 
 /*stores*/
-var PriorityStore = require('../stores/PriorityStore');
+var PriorityStore = require('./PriorityStore');
+console.log('task');
+// console.log(PriorityStore);
 
 var CHANGE_EVENT = 'change';
 
@@ -98,12 +100,14 @@ var TaskStore = objectAssign({}, EventEmitter.prototype, {
 	},
 	getPriorityTaskCount: function(index) {
 		return getPriorityTaskTotal(index);
+	},
+	getAllTaskCount: function() {
+		return _task_store.list.length;
 	}
 });
 
 AppDispatcher.register(function(payload){
 	var action = payload.action;
-	console.log(action.actionType);
 	switch(action.actionType){
 		case appConstants.ADD_ITEM:
 			addTask(action.data);

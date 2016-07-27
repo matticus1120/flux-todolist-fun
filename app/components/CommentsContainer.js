@@ -29,7 +29,6 @@ var CommentsContainer = React.createClass({
 	},
 	_onChange: function(){
 		comments = CommentStore.getCommenstForTask(this.props.taskId);
-		console.log('yo yo yo');
 		this.setState({
 			comments: comments
 		});

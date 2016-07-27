@@ -6,16 +6,19 @@ var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = 'change';
+console.log('priority');
+/*stores*/
+// var TaskStore = require('./TaskStore');
 
 var _priority_store = {
 	// priorities : [ 'Who cares?', 'Pretty Low', 'Medium-Low', 'Medium', 'High Priority Shit', 'Oh God!!' ],
 	priorities : [
-		{ order : 0, priority : 'Who cares?' },
-		{ order : 1, priority : 'Pretty Low' },
-		{ order : 2, priority : 'Medium-Low' },
-		{ order : 3, priority : 'Medium' },
-		{ order : 4, priority : 'High Priority Shit' },
-		{ order : 5, priority : 'Oh God!!' }
+		{ order : 0, priority : 'Who cares?', taskCount : 0 },
+		{ order : 1, priority : 'Pretty Low', taskCount : 0 },
+		{ order : 2, priority : 'Medium-Low', taskCount : 0 },
+		{ order : 3, priority : 'Medium', taskCount : 0 },
+		{ order : 4, priority : 'High Priority Shit', taskCount : 0 },
+		{ order : 5, priority : 'Oh God!!', taskCount : 0 }
 	],
 	selectedPriority : -1
 };
@@ -28,6 +31,13 @@ var setSelectedPriorityIndex = function(index) {
 	_priority_store.selectedPriority = index;
 }
 
+var getPrioritiesWithTaskCount = function() {
+	for( i = 0; i < _priority_store.priorities.length; i++ ) {
+		// _priority_store.priorities[i].taskCount = TaskStore.getPriorityTaskCount(index);
+	}
+	console.log(_priority_store.priorities[i]);
+}
+
 var PriorityStore = objectAssign({}, EventEmitter.prototype, {
 	addChangeListener: function(cb){
 		this.on(CHANGE_EVENT, cb);
@@ -36,6 +46,7 @@ var PriorityStore = objectAssign({}, EventEmitter.prototype, {
 		this.removeListener(CHANGE_EVENT, cb);
 	},
 	getAllPriorities: function() {
+		getPrioritiesWithTaskCount();
 		return _priority_store.priorities;
 	},
 	getSelectedPriority: function() {

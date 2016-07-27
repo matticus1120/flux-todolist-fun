@@ -41,7 +41,7 @@ var TaskList = React.createClass({
 
 			<div className="task-list-outer">
 				<header className="task-list-header">
-					<p>{this.props.tasks.length} tasks total</p>
+					<p>Displaying {this.props.tasks.length} { this.props.tasks.length == 1  ? 'task' : 'tasks' }.</p>
 				</header>
 				<table  className="table table-striped">
 					<thead>

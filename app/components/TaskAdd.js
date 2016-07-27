@@ -3,7 +3,7 @@ var React = require('react');
 var TaskAdd = React.createClass({
 
 	getInitialState: function() {
-		return { task : null, priority : null };
+		return { task : null, priority : 0 };
 	},
 	handleSubmit: function(e){
 		e.preventDefault();

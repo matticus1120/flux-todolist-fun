@@ -38,6 +38,7 @@ var getCommentsForTask = function(_taskId) {
 	});
 
 	return taskComments;
+	
 }
 
 var getCommentsForSelectedTask = function() {
