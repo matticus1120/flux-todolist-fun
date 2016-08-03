@@ -5,7 +5,7 @@ var taskActions = require('../actions/taskActions');
 
 /*stores*/
 var PriorityStore = require('../stores/PriorityStore');
-// var TaskStore = require('../stores/TaskStore');
+var TaskStore = require('../stores/TaskStore');
 
 var TaskPriorityList = React.createClass({
 

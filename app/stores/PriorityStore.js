@@ -8,7 +8,7 @@ var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 console.log('priority');
 /*stores*/
-var TaskStore = require('./TaskStore');
+// var TaskStore = require('./TaskStore');
 
 
 var _priority_store = {
